@@ -16,31 +16,30 @@ namespace Blazor.Servicios
             _configuration = configuration;
             usuarioRepositorio = new UsuarioRepositorio(configuration.CadenaConexion);
         }
-        
-        public Task<bool> Actualizar(Usuario usuario)
+
+        public async Task<bool> Actualizar(Usuario usuario)
         {
-            throw new NotImplementedException();
+            return await usuarioRepositorio.Actualizar(usuario);
         }
 
-        public Task<bool> Eliminar(Usuario usuario)
+        public async Task<bool> Eliminar(Usuario usuario)
         {
-            throw new NotImplementedException();
+            return await usuarioRepositorio.Eliminar(usuario);
         }
 
-        //Metodo para obtener la lista de los usuarios
         public async Task<IEnumerable<Usuario>> GetLista()
         {
             return await usuarioRepositorio.GetLista();
         }
 
-        public Task<Usuario> GetPorCodigo(string codigo)
+        public async Task<Usuario> GetPorCodigo(string codigo)
         {
-            throw new NotImplementedException();
+            return await usuarioRepositorio.GetPorCodigo(codigo);
         }
 
-        public Task<bool> Nuevo(Usuario usuario)
+        public async Task<bool> Nuevo(Usuario usuario)
         {
-            throw new NotImplementedException();
+            return await usuarioRepositorio.Nuevo(usuario);
         }
     }
 }

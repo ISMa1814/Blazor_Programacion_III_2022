@@ -23,14 +23,45 @@ public class UsuarioRepositorio : IUsuarioRepositorio
 
     //Metodos de las INTERFACES, SIEMPRE hay que agregar el async a los metodos asincronos
     
-    public Task<bool> Actualizar(Usuario usuario)
+    public async Task<bool> Actualizar(Usuario usuario)
     {
-        throw new NotImplementedException();
+        int resultado;
+        try
+        {
+            using MySqlConnection conexion = Conexion();
+            await conexion.OpenAsync();
+            string sql = "UPDATE usuario SET Codigo = @Codigo, Nombre = @Nombre, Rol = @Rol, Clave = @Clave, EstaActivo = @EstaActivo WHERE Codigo = @Codigo ;";
+            resultado = await conexion.ExecuteAsync(sql, new
+            {
+                usuario.Codigo,
+                usuario.Nombre,
+                usuario.Rol,
+                usuario.Clave,
+                usuario.EstaActivo
+            });
+            return resultado > 0;
+        }
+        catch (Exception ex)
+        {
+            return false;
+        }
     }
 
-    public Task<bool> Eliminar(Usuario usuario)
+    public async Task<bool> Eliminar(Usuario usuario)
     {
-        throw new NotImplementedException();
+        int resultado;
+        try
+        {
+            using MySqlConnection conexion = Conexion();
+            await conexion.OpenAsync();
+            string sql = "DELETE FROM usuario WHERE Codigo = @Codigo;";
+            resultado = await conexion.ExecuteAsync(sql, new { usuario.Codigo });
+            return resultado > 0;
+        }
+        catch (Exception ex)
+        {
+            return false;
+        }
     }
 
     //Metodo para OBTENER la LISTA de USUARIOS
@@ -53,13 +84,40 @@ public class UsuarioRepositorio : IUsuarioRepositorio
         return lista;
     }
 
-    public Task<Usuario> GetPorCodigo(string codigo)
+    //Metodo para OBTENER el USUARIO con el CODIGO
+    public async Task<Usuario> GetPorCodigo(string codigo)
     {
-        throw new NotImplementedException();
+        Usuario user = new Usuario();
+        try
+        {
+            //Using nos ayuda a generar una mejor conexion
+            using MySqlConnection conexion = Conexion();
+            await conexion.OpenAsync();
+            string sql = "SELECT * FROM usuario WHERE Codigo = @Codigo;";
+            //Esto es para que muestre la tabla de los usuarios
+            user = await conexion.QueryFirstAsync<Usuario>(sql, new {codigo});
+        }
+        catch (Exception)
+        {
+        }
+        return user;
     }
 
-    public Task<bool> Nuevo(Usuario usuario)
+    //Metodo para CREAR un NUEVO USUARIOS
+    public async Task<bool> Nuevo(Usuario usuario)
     {
-        throw new NotImplementedException();
+        int resultado;
+        try
+        {
+            using MySqlConnection conexion = Conexion();
+            await conexion.OpenAsync();
+            string sql = "INSERT INTO usuario (Codigo, Nombre, Rol, Clave, EstaActivo) VALUES (@Codigo, @Nombre, @Rol, @Clave, @EstaActivo)";
+            resultado = await conexion.ExecuteAsync(sql, usuario);
+            return resultado > 0;
+        }
+        catch (Exception ex)
+        {
+            return false;
+        }
     }
 }

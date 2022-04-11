@@ -5,9 +5,9 @@ VisualStudioVersion = 17.1.32319.34
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazor", "Blazor\Blazor.csproj", "{127B5F5D-ADBA-4A0C-BD51-B7B8722B4193}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modelos", "Modelos\Modelos.csproj", "{AEA791EB-692E-4541-8580-E687B8B08F96}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Modelos", "Modelos\Modelos.csproj", "{AEA791EB-692E-4541-8580-E687B8B08F96}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Datos", "Datos\Datos.csproj", "{94A5293B-5308-4A59-BED5-53B00EFAF773}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Datos", "Datos\Datos.csproj", "{94A5293B-5308-4A59-BED5-53B00EFAF773}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
